@@ -6,7 +6,7 @@ Inspiration: https://tympanus.net/codrops/2025/03/03/css-meets-voxel-art-buildin
 
 # How it works:
 
-## Setting up the 3D scene space
+## Setting up the 3D scene space
 
 First, we establish a `scene` div, which controls perspective and applies `preserve-3d` to that scene and all the scene children.
 
@@ -97,7 +97,7 @@ with the following css:
 
 Firstly, we translate the cube up the Z axis by 15px (half the size of a cube). This logically places the cube at the center of its cell. We then translate each face of the cube along the X, Y, and Z axes. For example, the top face is translated a further 15px up the Z, positioning it at the top of the cubes area within its cell on the grid.
 
-## Defining a world
+## Defining a world
 
 Now, we need to define a world. This world object consists of Z layers represented as a 2d array for each layer along the Z axis of our grid. For example:
 
@@ -121,9 +121,9 @@ const world = [
 ];
 ```
 
-This defined a 4x4 world grid with 2 Z layers. 
+This defined a 4x4 world grid with 2 Z layers.
 
-## Layer and Cub render functions
+## Layer and Cube render functions
 
 Now, let's create the functions for rendering the layers and cubes using this world object:
 
@@ -160,7 +160,7 @@ function Layer({ z, grid }) {
 }
 ```
 
-The `Layer` function will, for each layer within the world object, create a cube for each array index with a value of 1. 
+The `Layer` function will, for each layer within the world object, create a cube for each array index with a value of 1.
 
 ## Rendering our defined world within the scene
 
@@ -183,5 +183,3 @@ export default function App() {
 ```
 
 and that's it! We're now rendering 16 cubes. 12 on the bottom layer, and 4 on the top layer.
-
-
