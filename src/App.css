@@ -16,15 +16,6 @@ body {
   transform-style: preserve-3d;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotateX(65deg) rotateZ(0deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(65deg) rotateZ(720deg) rotateY(0deg);
-  }
-}
-
 .world {
   position: relative;
   width: calc(26 * 30px);
@@ -32,8 +23,8 @@ body {
   transform-style: preserve-3d;
   transform: rotateX(65deg) rotateZ(45deg);
   transform-origin: center center;
-  animation: rotate 20s linear infinite;
   background: #000000;
+  transition: transform 0.05s ease-out;
 }
 
 .layer {
@@ -108,7 +99,7 @@ body {
   transform-style: preserve-3d;
   transform: rotateX(65deg) rotateZ(45deg);
   transform-origin: center center;
-  animation: rotate 20s linear infinite;
+  transition: transform 0.05s ease-out;
 }
 
 .axis {
@@ -173,4 +164,24 @@ body {
 
 .z-axis .axis-label {
   color: #3296ff;
+}
+
+/* Controls Info */
+.controls-info {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls-info div {
+  margin: 3px 0;
 }
