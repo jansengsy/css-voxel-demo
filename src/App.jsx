@@ -1,56 +1,36 @@
 import "./App.css";
+import { tree, house, MATERIALS } from "./models";
+import { combineModels } from "./utils/modelLoader";
 
-const CUBE_SIZE = 50;
+const GRID_SIZE = 26;
+const CUBE_SIZE = 30;
 
-// A simple 3D world represented as a Z → Y → X structure
-const world = [
-  // Z = 0
-  [
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-  ],
-  // Z = 1
-  [
-    [0, 0, 0, 0],
-    [0, 1, 1, 0],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-  ],
-  // Z = 2
-  [
-    [0, 0, 0, 0],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  // Z = 3
-  [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  // Z = 4
-  [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  // Z = 5
-  [
-    [0, 0, 0, 0],
-    [0, 0, 1, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-];
+// Load a model - you can use multiple models with different positions
+// Option 1: Simple array of models (all placed at origin)
+// const world = combineModels([tree]);
 
-function Cube(props) {
+// Option 2: Models with custom positions
+// const world = combineModels([tree, house]);
+
+// Option 3: Models with custom positions and scale
+const world = combineModels(
+  [
+    { model: tree, position: { x: 2, y: 2, z: 0 }, scale: 1 },
+    { model: house, position: { x: 12, y: 2, z: 0 }, scale: 0.5 },
+  ],
+  GRID_SIZE
+);
+
+function Cube({ material, style, ...props }) {
+  const color = MATERIALS[material] || "#34dcf6";
   return (
-    <div className="cube" {...props}>
+    <div
+      className="cube"
+      style={{ "--cube-color": color, ...style }}
+      {...props}
+      data-material={material}
+      data-color={color}
+    >
       <div className="face top"></div>
       <div className="face right"></div>
       <div className="face left"></div>
@@ -67,9 +47,10 @@ function Layer({ z, grid }) {
       {grid.map((row, y) =>
         row.map(
           (cell, x) =>
-            cell === 1 && (
+            cell !== 0 && (
               <Cube
                 key={`${z}-${y}-${x}`}
+                material={cell}
                 style={{ gridArea: `${y + 1} / ${x + 1}` }}
               />
             )

@@ -8,8 +8,8 @@ body {
 
 .scene {
   perspective: 8000px;
-  width: 600px;
-  height: 600px;
+  width: 1000px;
+  height: 1000px;
 }
 
 .scene * {
@@ -21,74 +21,70 @@ body {
     transform: rotateX(65deg) rotateZ(0deg) rotateY(0deg);
   }
   to {
-    transform: rotateX(65deg) rotateZ(360deg) rotateY(0deg);
+    transform: rotateX(65deg) rotateZ(720deg) rotateY(0deg);
   }
 }
 
 .world {
   position: relative;
-  width: calc(4 * 50px);
-  height: calc(4 * 50px);
+  width: calc(26 * 30px);
+  height: calc(26 * 30px);
   transform-style: preserve-3d;
   transform: rotateX(65deg) rotateZ(45deg);
   transform-origin: center center;
   animation: rotate 20s linear infinite;
+  background: #000000;
 }
 
 .layer {
   display: grid;
-  grid-template-columns: repeat(4, 50px);
-  grid-template-rows: repeat(4, 50px);
+  grid-template-columns: repeat(26, 30px);
+  grid-template-rows: repeat(26, 30px);
   position: absolute;
   top: 0;
   left: 0;
   transform-style: preserve-3d;
-  transform: translateZ(calc(var(--z) * 50px));
+  transform: translateZ(calc(var(--z) * 30px));
 }
 
 .cube {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   transform-style: preserve-3d;
-  transform: translateZ(25px);
+  transform: translateZ(15px);
 }
 
 .face {
   position: absolute;
   inset: 0;
-  background: #34dcf6;
-  border: 1px solid #34dcf6;
+  background: var(--cube-color, #34dcf6);
+  border: 1px solid
+    color-mix(in srgb, var(--cube-color, #34dcf6) 80%, black 20%);
 }
 
 .face.top {
-  transform: translateZ(25px);
-  background: #00feba;
+  transform: translateZ(15px);
 }
 
 .face.right {
-  transform: rotateY(90deg) translateZ(25px);
-  background: #00feba;
+  transform: rotateY(90deg) translateZ(15px);
 }
 
 .face.left {
-  transform: rotateX(90deg) translateZ(25px);
-  background: #00feba;
+  transform: rotateX(90deg) translateZ(15px);
 }
 
 .face.bottom {
-  transform: rotateX(-90deg) translateZ(25px);
-  background: #00feba;
+  transform: rotateX(-90deg) translateZ(15px);
 }
 
 .face.front {
-  transform: translateZ(25px);
-  background: #00feba;
+  transform: translateZ(15px);
 }
 
 .face.back {
-  transform: rotateY(-90deg) translateZ(25px);
-  background: #00feba;
+  transform: rotateY(-90deg) translateZ(15px);
 }
 
 /* Compass Styles */
